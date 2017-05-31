@@ -1,0 +1,84 @@
+<header>
+    <nav class="navbar navbar-default primary-header navbar-fixed-top">
+        <div class="container mm-container-postion">
+            <div class="row">
+                <div class="navbar-header">
+                    <a class="navbar-brand site-logo pointer"></a>
+                    <h4 class="left-line pull-left receipt-header">Sales HE/HL</h4>
+                    <a2Menu [menuItems]="menuItems"></a2Menu>
+                </div>
+                <div class="navbar-collapse pad-r-1 pull-right">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <img src="content/images/profile_avetar.png" class="user-profile-pic">
+                        </li>
+                        <li class="username-section">
+                            <div class="dropdown" dropdown>
+                                <a href="javascript:void(0);" class="dropdown-toggle " dropdown-toggle type="button" id="dropdownMenu1" data-toggle="dropdown"> {{headerVDO.userDetails.userName}}
+                                <span class="drop-down-account"></span>
+                            </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation"><a class="pointer" role="menuitem" tabindex="-1">Settings</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li role="presentation"><a class="pointer" role="menuitem" tabindex="-1" data-ng-click="logOutHandler()">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <!--<li class="searchbox" data-ng-click="stopPropagate($event);">
+                            <button type="button" class="btn btn-grey header-search" data-ng-click="isCollapsed = !isCollapsed">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            <section data-ng-show="isCollapsed">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option>Agreement NO</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Keyword" data-ng-model="searchKey">
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary pull-right" data-ng-click="globalSearchHandler()">Search</button>
+                                </div>
+                            </section>
+                        </li>-->
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-default secondary-header">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header">
+                    <h4>
+                        <a class="pointer breadcrumb-arrow" data-ng-show="backState" data-ng-click="backHandler()"></a>
+                        <span>{{headerText}}</span>
+                    </h4>
+                </div>
+                <!--<ul class="nav navbar-nav pull-right">
+                    <li class="dropdown" dropdown>
+                        <div class="notify-icon notify-bell dropdown-toggle pointer" dropdown-toggle data-toggle="dropdown">
+                            <span class="notify-count" data-ng-show="notifications.length>0">{{notifications.length}}</span>
+                        </div>
+                        <ul class="dropdown-menu dropdown-menu-right notification-box" role="menu" aria-labelledby="dropdownMenu1">
+                            <li class="dropdown-header">
+                                <span class="notify-icon notify-none"></span>Alerts ( {{notifications.length}} )</li>
+
+                            <li data-ng-repeat="note in notifications|limitTo:5" data-ng-click="showAllNotification(note,$index)"><a class="pointer">{{note.title}}</a>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-grey" data-ng-click="showAllNotification()">View More</button>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>-->
+            </div>
+        </div>
+    </nav>
+</header>

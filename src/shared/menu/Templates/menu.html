@@ -1,0 +1,28 @@
+<ng-container *ngIf="menuVDO.hasItems">
+    <div class="dropdown pull-left icon-block" [ngClass]="{'mm-dropdown open':menuVDO.isOpen}">
+        <button type="button" class="navbar-toggle  mm-icon-bar" (click)="isClicked($event)">
+		<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+		<span class="icon-bar"></span> <span class="icon-bar"></span>
+	</button>
+        <table class="table dropdown-menu mm-dropdown-menu">
+            <tbody>
+                <tr>
+                    <td class="container">
+                        <div class="row col-xs-12">
+                            <div class="col-xs-3" *ngFor="let menuItem of menuItems">
+                                <div *ngIf="menuItem.subMenus.length">
+                                    <ul class="mm-link-block list-unstyled">
+                                        <li class="mm-link-header" style="font-weight: bold">{{menuItem.menuName}}</li>
+                                        <li *ngFor="let subMenu of menuItem.subMenus"><a (click)="navigateTo(subMenu)" style="cursor: pointer;">{{subMenu.menuName}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-container>
+<!--[ngClass]="{'user-profile-section':($index===4)}"-->

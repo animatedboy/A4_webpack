@@ -1,0 +1,41 @@
+<div class="container">
+    <form class="custom-form view-form ">
+        <div class="row">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="col-xs-12 no-padding" *ngIf="vdo.totalRecord > 0">
+                        <table class="table table-format table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>App ID.</th>
+                                    <th>Product</th>
+                                    <th>Branch</th>
+                                    <th>Customer Name</th>
+                                    <th>Loan Amount</th>
+                                    <th>App Status</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let application of vdo.applicationList">
+                                    <td>
+                                        <p>{{application.applicationDisplayID}}</p>
+                                    </td>
+                                    <td>{{application.product}}</td>
+                                    <td>{{application.branchDesc}}</td>
+                                    <td>{{application.partyDetails[0].firstName || application.partyDetails[0].companyName}} {{application.partyDetails[0].lastName}}</td>
+                                    <td><b class="fa fa-inr"></b> {{application.loanDetail.loanAmount}}</td>
+                                    <td>{{application.applicationStatus}} </td>
+                                    <td>{{application.createdDate}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="vdo.totalRecord === 0">
+                        <h4>No loan applications currently available.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

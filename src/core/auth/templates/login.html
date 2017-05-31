@@ -1,0 +1,29 @@
+<a2Header></a2Header>
+<div style="margin-left: auto; margin-right: auto; margin-top: 50px; width: 500px;">
+    <div class="panel" style="padding: 10px;">
+        <div class="panel-heading" style="text-align: center">
+            <h2>Login</h2>
+        </div>
+        <div class="panel-body">
+            <form name="loginForm" autocomplete="off">
+                <div class="row clear clearfix">
+                    <div class="form-group">
+                        <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
+                        <label for="text_customername">User ID</label>
+                        <input type="text" class="form-control" name="text_username" placeholder="Enter User ID" [(ngModel)]="loginModel.userId" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="text_password">Password</label>
+                        <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
+                        <input type="password" class="form-control" name="text_password" placeholder="Enter Password" [(ngModel)]="loginModel.password" maxlength="20" autocomplete="off">
+
+                    </div>
+
+                </div>
+                <div class="actions-bar" style="margin-left: -10px; margin-top: 10px;">
+                    <button class="btn btn-info" (click)="login(loginModel)">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+/* Reset the container */
+
+.navbar-default {
+    background-color: #fff;
+    border-color: #eee;
+    min-height: 55px;
+}
+
+.container {
+    max-width: 1024px;
+    /*width: 1007px;*/
+}
+
+.container .navbar-header,
+.container .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+
+/* Always float the navbar header */
+
+.navbar-header {
+    float: left;
+}
+
+
+/* Undo the collapsing navbar */
+
+.navbar-collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+}
+
+.navbar-toggle {
+    display: block;
+}
+
+.icon-block {
+    padding-left: 19px;
+}
+
+.icon-block .navbar-toggle {
+    border: 0;
+}
+
+.icon-block .navbar-toggle .icon-bar {
+    height: 3px;
+    background: #707f99;
+}
+
+.icon-block .navbar-toggle:hover,
+.icon-block .navbar-toggle:focus {
+    background: transparent;
+}
+
+.navbar-collapse {
+    border-top: 0;
+}
+
+.navbar-brand {
+    margin-left: -15px;
+}
+
+
+/* Always apply the floated nav */
+
+.navbar-nav {
+    float: left;
+    margin: 0 !important;
+}
+
+.navbar-nav>li {
+    float: left;
+}
+
+.navbar-nav>li>a {
+    padding: 15px;
+}
+
+
+/* Redeclare since we override the float above */
+
+.navbar-nav.navbar-right {
+    float: right;
+}
+
+.navbar-nav.navbar-right>li.dropdown>a {
+    padding: 19px 15px;
+}
+
+.mm-container-postion {
+    position: relative;
+}
+
+
+/* ==========================================================================*/
+
+
+/* _Secondary Header */
+
+.secondary-header {
+    background-color: #003f88;
+    border: 0;
+    /*border-bottom: 3px solid #ed1c24;*/
+    border-bottom: 2px solid #ed1c24;
+    margin-top: 55px;
+    min-height: 56px;
+}
+
+.secondary-header .navbar-header {
+    color: #ffffff;
+    /*padding-top: 10px;*/
+    padding-top: 6px;
+}
+
+.secondary-header .navbar-header h4 {
+    font-size: 18px;
+}
+
+.site-logo {
+    background: url(content/images/chola_logo_banner.jpg);
+    width: 107px;
+    height: 50px;
+    margin-left: -4px !important;
+    margin-right: 10px;
+}
+
+.primary-header .user-profile-pic {
+    width: 45px;
+    height: 45px;
+    margin: 5px;
+}
+
+.left-line {
+    border-left: 1px solid #EAEAEA
+}
+
+.receipt-header {
+    padding: 10px;
+    color: #52617a;
+    font-size: 15px
+}
+
+.username-section div.dropdown {
+    padding: 10px 0px 5px 10px;
+}
+
+
+/* _Header styles */
