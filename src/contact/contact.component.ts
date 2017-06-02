@@ -3,10 +3,9 @@ import { Contact, ContactService } from './contact.service';
 import { LoginService } from '../core/auth/Services/login.service'
 
 @Component({
-  moduleId: "1",
   selector: 'app-contact',
-  templateUrl: 'build/contact/contact.component.html',
-  styleUrls: [ 'build/contact/contact.component.css' ]
+  templateUrl: './contact.component.html',
+  styleUrls: [ './contact.component.css' ]
 })
 export class ContactComponent implements OnInit {
   contact:  Contact;

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Router} from '@angular/router'
 import { HttpProgressIndicatorFactory } from '../Service/httpProgressIndicator.factory'
 @Component({
-    moduleId:module.id,
+    
     selector: 'http-progress-indicator',
     templateUrl: '../Templates/httpProgressIndicator.html',
     styleUrls: [

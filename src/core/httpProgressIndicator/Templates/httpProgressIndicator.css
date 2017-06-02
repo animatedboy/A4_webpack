@@ -1,6 +1,6 @@
 .spinner-block {
     position: fixed;
-    top: 0;    
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
@@ -9,7 +9,7 @@
 }
 
 .spinner-block .twitter-bird-animation {
-    background-image: url("../images/chola-spinner.png");
+    /*background-image: url("../images/chola-spinner.png");*/
     background-size: cover;
     height: 50px;
     width: 50px;

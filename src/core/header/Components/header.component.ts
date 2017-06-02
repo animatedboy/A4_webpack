@@ -3,7 +3,7 @@ import { LoginService } from '../../auth/Services/login.service';
 import { HeaderService } from '../Services/header.service'
 
 @Component({
-    moduleId:module.id,
+    
    selector: 'a2Header',
    templateUrl:'../Templates/header.html',
    styleUrls: [

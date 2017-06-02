@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'result-dialog',
-    templateUrl:'build/shared/dialogService/Templates/alert.html',
+    templateUrl:'../Templates/alert.html',
 })
 export class AlertDialog {
 

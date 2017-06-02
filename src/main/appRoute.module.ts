@@ -7,8 +7,8 @@ import {SharedModule} from '../shared/shared.module'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'contact', loadChildren: 'app/contact/contact.module#ContactModule' },
-  { path:'sales_HEHL', loadChildren:'app/SalesHEHL/SalesHEHL.module#SalesHEHLModule'}
+  { path: 'contact', loadChildren: '../contact/contact.module#ContactModule' },
+  { path:'sales_HEHL', loadChildren:'../SalesHEHL/salesHEHL.module#SalesHEHLModule'}
 ];
 
 @NgModule({

@@ -3,7 +3,6 @@ import {HeaderService} from '../../../core/header/Services/header.service';
 import {Router,ActivatedRoute,Route} from '@angular/router'
 
 @Component({
-  moduleId: module.id,
   selector: 'loan_Application',
   template:"<h4>In to LoanApplication</h4>"
 })

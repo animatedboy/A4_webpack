@@ -5,7 +5,7 @@ import {ResponseStatus,IBaseResponse} from '../../../shared/utilities/utility';
 import { LoginModel } from '../Models/loginModel';
 
 @Component({
-  moduleId:module.id,
+  
   selector: 'login',
   templateUrl:'../Templates/login.html'
 })

@@ -4,7 +4,7 @@ import {HeaderService} from '../../../core/header/Services/header.service';
 import {MyApplicationService} from "../Services/myApplications.service"
 
 @Component({
-  moduleId:module.id,
+  
   selector: 'myApplications',
   templateUrl:'../Templates/myApplications.html',
   providers:[MyApplicationService],

@@ -3,10 +3,8 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  moduleId:module.id,
   selector: 'my-app',
   template:'<div class="bodyContainer"><router-outlet></router-outlet></div><a2Footer></a2Footer><http-progress-indicator></http-progress-indicator>',
- // entryComponents : [LoaderComponent]
 })
 export class AppComponent { 
    title:string="Angular 2"

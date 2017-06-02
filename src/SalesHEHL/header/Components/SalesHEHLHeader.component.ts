@@ -4,7 +4,7 @@ import {LoginService} from '../../../core/auth/Services/login.service'
 import {HeaderService} from '../../../core/header/Services/header.service';
 
 @Component({
-  moduleId:module.id,
+  //
   selector: 'salesHEHLHeader',
   templateUrl:"../Templates/header.html",
   styleUrls:["../../../core/header/Templates/header.css"]

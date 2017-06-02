@@ -1,21 +1,26 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": [ "es2015", "dom" ],
-    //"suppressImplicitAnyIndexErrors": true,
-    "outDir": "../build",
-    "noImplicitAny": false,
-    "declaration": true,
-    "removeComments": false,
-    "listEmittedFiles":true
-  },
-  "exclude": [
-    "node_modules"
-  ]
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": ["es2015", "dom"],
+        //"suppressImplicitAnyIndexErrors": true,
+        "outDir": "../build",
+        "noImplicitAny": false,
+        "declaration": true,
+        "removeComments": false,
+        "listEmittedFiles": true,
+        "typeRoots": [
+            "../node_modules/@types/"
+        ],
+        "types": ["node"]
+    },
+    "exclude": [
+        "node_modules",
+        "**/*-aot.ts"
+    ]
 
 }

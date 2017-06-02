@@ -16,10 +16,10 @@ export const SalesHEHLRoutes : Routes = [
             },
              {
                 path: 'myApplications',
-                loadChildren: "app/SalesHEHL/myApplications/myApplication.module#MyApplicationModule"
+                loadChildren: "../SalesHEHL/myApplications/myApplication.module#MyApplicationModule"
             },{
                 path:'loanApplication',
-                loadChildren: "app/SalesHEHL/loanApplication/loanApplication.module#LoanApplicationModule"
+                loadChildren: "../SalesHEHL/loanApplication/loanApplication.module#LoanApplicationModule"
             }
         ]
     }
