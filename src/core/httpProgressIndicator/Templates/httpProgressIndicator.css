@@ -9,7 +9,7 @@
 }
 
 .spinner-block .twitter-bird-animation {
-    /*background-image: url("../images/chola-spinner.png");*/
+    background-image: url("../../../assets/images/chola-spinner.png");
     background-size: cover;
     height: 50px;
     width: 50px;
