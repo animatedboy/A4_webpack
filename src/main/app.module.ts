@@ -6,15 +6,15 @@ import { AppComponent } from './app.component'
 import { AppRoutingModule }   from './appRoute.module';
 import { HttpModule } from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MaterialModule } from '@angular/material';
+import {MatDialogModule } from '@angular/material';
 
 
 @NgModule({
-  imports:      [ MaterialModule,BrowserAnimationsModule,HttpModule,AppRoutingModule,CoreModule,SharedModule],
+  imports:      [MatDialogModule,BrowserAnimationsModule,HttpModule,AppRoutingModule,CoreModule,SharedModule],
   declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ],
   providers:[],
-  exports:[MaterialModule]
+  exports:[MatDialogModule]
 })
 
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { Component } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ export class AlertDialog {
     public title: string;
     public message: string;
 
-    constructor(public dialogRef: MdDialogRef<AlertDialog>) {
+    constructor(public dialogRef: MatDialogRef<AlertDialog>) {
 
     }
 }

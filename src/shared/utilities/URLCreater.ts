@@ -5,7 +5,17 @@ export interface IBaseRequestOps{
      urlParams:any;
      queryParams:any;
      body:any;
-     method:RequestMethod
+     method:string;
+}
+
+export declare enum ReqMethod {
+    Get = 'GET',
+    Post = 'POST',
+    Put = 'PUT',
+    Delete = 'DELETE',
+    Options = 'OPTION',
+    Head = 'HEAD',
+    Patch = 'PATCH',
 }
 
 
@@ -14,7 +24,7 @@ export interface IBaseRequestOps{
      urlParams:any;
      queryParams:any;
      body:any;
-     method:RequestMethod
+     method:string
     constructor(_url:string,_method,_urlParams?,_queryParams?,_body?,){
         this.url= _url;
         this.urlParams = _urlParams;
@@ -26,12 +36,12 @@ export interface IBaseRequestOps{
 
 class CreateGET extends BaseRequestOps{
        constructor( url:string, urlParams?, queryParams? ) {
-           super(url,RequestMethod.Get,urlParams,queryParams);
+           super(url,ReqMethod.Get,urlParams,queryParams);
        }
  } 
 
  class CreateUpdate extends BaseRequestOps{
-       constructor( url:string,method:RequestMethod,urlParams?, queryParams?,body? ) {
+       constructor( url:string,method:ReqMethod,urlParams?, queryParams?,body? ) {
            super(url,method,urlParams,queryParams,body);
        }
  } 
@@ -46,17 +56,17 @@ export class URLCreater{
    }
 
    public CreatePOST(urlParams,queryParams,body):any{
-       let method = RequestMethod.Post;
+       let method = ReqMethod.Post;
        return new CreateUpdate(this.url,method,urlParams,queryParams,body);
    }
 
    public CreatePUT(urlParams,queryParams,body):any{
-        let method = RequestMethod.Put;
+        let method = ReqMethod.Put;
        return new CreateUpdate(this.url,method,urlParams,queryParams,body);
    }
 
    public CreateDelete(urlParams,queryParams,body):any{
-       let method = RequestMethod.Delete;
+       let method = ReqMethod.Delete;
        return new CreateUpdate(this.url,method,urlParams,queryParams,body);
    }
 

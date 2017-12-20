@@ -3,3 +3,4 @@ build
 *.log
 content
 dist
+package-lock.json

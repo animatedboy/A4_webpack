@@ -1,14 +1,14 @@
 import {Observable} from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
-import { HttpProxy,InterceptorOptions } from '../../httpProxy/httpInterceptor/httpProxy';
 import { DialogsService } from '../../dialogService/Services/dialog.service';
-import { URLSearchParams,Headers,ResponseContentType,RequestMethod,RequestOptions,Request,Response} from '@angular/http'
-import { IBaseRequestOps,ResponseStatus,BaseResponse } from '../../../shared/utilities/utility';
+import {HttpHeaders,HttpRequest,HttpResponse,HttpClient,HttpParams,HttpResponseBase} from '@angular/common/http';
+import {URLSearchParams,ResponseContentType,RequestMethod} from '@angular/http';
+import { IBaseRequestOps,ResponseStatus,BaseResponse,ReqMethod } from '../../../shared/utilities/utility';
 
 @Injectable()
 export class RestProxy {
 
-    constructor(private _http:HttpProxy,private dialogService:DialogsService) {
+    constructor(private _http:HttpClient,private dialogService:DialogsService) {
 
     }
 
@@ -56,16 +56,16 @@ export class RestProxy {
         return Observable.of({status:"failure"});
     }
 
-    private setUrlParams (params):URLSearchParams{
-        let searchParams = new URLSearchParams();
+    private setUrlParams (params):HttpParams{
+        let searchParams = new HttpParams();
          for(let key in params){
             searchParams.set(key,params[key])
          } 
          return searchParams;   
     }
 
-    private setHeaders = function(headers?){
-       let reqHeaders = new Headers();
+    private setHeaders = function(headers?):HttpHeaders{
+       let reqHeaders = new HttpHeaders();
          for(let key in headers){
             reqHeaders.set(key,headers[key])
          } 
@@ -73,15 +73,15 @@ export class RestProxy {
          return reqHeaders; 
     }
 
-    private setRequestOptions(url:string,method:RequestMethod,params?:URLSearchParams,headers?:Headers,body?:Object,responseType?:ResponseContentType):RequestOptions{
-        var requestOptions = new RequestOptions({
-            url:url,
-            method:method,
-            search:params,
+    private setRequestOptions(url:string,method:string,params?:HttpParams,headers?:HttpHeaders,body?:Object,responseType?:ResponseContentType):HttpRequest<any>{
+
+        var requestOptions= new HttpRequest(method,url,{
             headers:headers,
-            body:body?body:null,
-            responseType:responseType?responseType:ResponseContentType.Json,
+            params:params,
+            responseType:responseType?responseType:'json',
+            body:body?body:null
         });
+       
 
         return requestOptions;
     }
@@ -90,7 +90,7 @@ export class RestProxy {
         let searchParams = this.setUrlParams(URL.queryParams);
         var reqHeaders = this.setHeaders();
         let requestOptions = this.setRequestOptions(URL.url,URL.method,searchParams,reqHeaders,URL.body)
-        return this._http.request(new Request(requestOptions)).flatMap((response:Response)=>{
+        return this._http.request(requestOptions).subscribe((response:HttpResponse<any>)=>{
              if (response.ok) {
                let successResult = this.responseTransformer(response)
                return Observable.of(successResult);
