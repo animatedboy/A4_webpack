@@ -25,17 +25,15 @@ export class LoginService{
         return Promise.reject(error.message||error);
     };
 
-    private GETUSERS = new URLCreater('usermanagementapi/employees/entitlements');
-    private AUTHUSERS = new URLCreater('usermanagementapi/auth/authenticate');
 
     private _getUserDetails():Promise<any>{
-        return this._http.getData( this.GETUSERS.createGET({},{})).then((response) => {
+        return this._http.getData('usermanagementapi/employees/entitlements').then((response) => {
             return response;
         });
     };
 
     authenticate(loginModel):Promise<IBaseResponse>{
-             return this._http.saveData(this.AUTHUSERS.CreatePOST(undefined,undefined,loginModel)).then((response) => {
+             return this._http.postData('usermanagementapi/auth/authenticate',loginModel).then((response) => {
                if(response.status === ResponseStatus.Success){
                     return this._getUserDetails().then((response) => {
                         if (response.status === ResponseStatus.Success) {

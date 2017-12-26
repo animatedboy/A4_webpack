@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { DialogsService } from '../dialogService/dialog.service';
 import {HttpHeaders,HttpRequest,HttpResponse,HttpClient,HttpParams,HttpResponseBase,HttpErrorResponse} from '@angular/common/http';
 import {URLSearchParams,ResponseContentType,RequestMethod} from '@angular/http';
-import { IBaseRequestOps,ResponseStatus,BaseResponse } from '../../shared/utilities/utility';
+import { IBaseRequestOps,ResponseStatus,BaseResponse,URLCreater } from '../../shared/utilities/utility';
 
 @Injectable()
 export class RestProxy {
@@ -141,17 +141,24 @@ export class RestProxy {
 
     }
 
-    public getData (URL:IBaseRequestOps):Promise<BaseResponse>{
+    public getData (url,queryParams?,urlParams?):Promise<BaseResponse>{
+        let URL = new URLCreater(url).get(urlParams,queryParams);
         return this.baseRequestMaker(URL);
     }
 
-    public saveData(URL:IBaseRequestOps):Promise<BaseResponse>{
+    public saveData(url,body,queryParams?,urlParams?):Promise<BaseResponse>{
+         let URL = new URLCreater(url).put(urlParams,queryParams,body);
          return this.baseRequestMaker(URL);
     }
 
+    public postData(url,body,queryParams?,urlParams?):Promise<BaseResponse>{
+        let URL = new URLCreater(url).post(urlParams,queryParams,body);
+        return this.baseRequestMaker(URL);
+   }
 
-    public deleteData(){
-
+    public deleteData(url,body,queryParams?,urlParams?){
+        let URL = new URLCreater(url).delete(urlParams,queryParams,body);
+        return this.baseRequestMaker(URL);
     }
 
     

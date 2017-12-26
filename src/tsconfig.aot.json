@@ -1,0 +1,33 @@
+{
+  "compileOnSave": true,
+  "exclude": [
+    "node_modules/*",
+    "aot/"
+  ],
+
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2015", "dom"],
+    "outDir": "../aot",
+    "noImplicitAny": false,
+    "declaration": true,
+    "removeComments": false,
+    "listEmittedFiles": true,
+    "typeRoots": [
+        "../node_modules/@types/"
+    ],
+    "types": ["node"]
+},
+  "angularCompilerOptions": {
+    "genDir": ".",
+    "skipMetadataEmit": true
+  },
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}
