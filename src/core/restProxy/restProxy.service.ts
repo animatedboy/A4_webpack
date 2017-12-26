@@ -1,9 +1,9 @@
 import {Observable} from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
-import { DialogsService } from '../../dialogService/Services/dialog.service';
-import {HttpHeaders,HttpRequest,HttpResponse,HttpClient,HttpParams,HttpResponseBase} from '@angular/common/http';
+import { DialogsService } from '../dialogService/dialog.service';
+import {HttpHeaders,HttpRequest,HttpResponse,HttpClient,HttpParams,HttpResponseBase,HttpErrorResponse} from '@angular/common/http';
 import {URLSearchParams,ResponseContentType,RequestMethod} from '@angular/http';
-import { IBaseRequestOps,ResponseStatus,BaseResponse,ReqMethod } from '../../../shared/utilities/utility';
+import { IBaseRequestOps,ResponseStatus,BaseResponse } from '../../shared/utilities/utility';
 
 @Injectable()
 export class RestProxy {
@@ -12,9 +12,38 @@ export class RestProxy {
 
     }
 
-    private responseTransformer(response:Response):BaseResponse{
+    private responseTransformer(response:HttpResponse<any>):BaseResponse{
         let transformedResponse = new BaseResponse();
-        let result = response.json();
+        let result = response.body;
+
+        transformedResponse.status = response.ok?ResponseStatus.Success:ResponseStatus.Failure;
+        transformedResponse.data= response.ok?result:[];
+        let leapMetaData = response.ok?response.headers.get("LEAP_MetaData"):"";
+        if(leapMetaData && leapMetaData !== null && leapMetaData !== "undefined"){
+           transformedResponse.meta = JSON.parse(leapMetaData);
+           if(transformedResponse.meta.message){
+               transformedResponse.message = transformedResponse.meta.message;
+           }
+        }else{
+          transformedResponse.message = leapMetaData;
+          transformedResponse.meta = leapMetaData;
+        }
+        
+
+        if(response.status === 401){
+           transformedResponse.errorData =!response.ok && result?result:[];
+           transformedResponse.message = !response.ok && result?result:"";
+        }else if(!response.ok){
+           transformedResponse.errorData = result.errors?result.errors:[]; 
+           transformedResponse.message = result.errors?result.errors[0].message:"";
+        }
+
+        return transformedResponse;
+    };
+
+    private errorTransformer (response:HttpErrorResponse):BaseResponse{
+        let transformedResponse = new BaseResponse();
+        let result = response.error
 
         transformedResponse.status = response.ok?ResponseStatus.Success:ResponseStatus.Failure;
         transformedResponse.data= response.ok?result:[];
@@ -79,7 +108,8 @@ export class RestProxy {
             headers:headers,
             params:params,
             responseType:responseType?responseType:'json',
-            body:body?body:null
+            body:body?body:null,
+            observe: 'response'
         });
        
 
@@ -89,18 +119,26 @@ export class RestProxy {
     private baseRequestMaker(URL:IBaseRequestOps):Promise<BaseResponse>{
         let searchParams = this.setUrlParams(URL.queryParams);
         var reqHeaders = this.setHeaders();
-        let requestOptions = this.setRequestOptions(URL.url,URL.method,searchParams,reqHeaders,URL.body)
-        return this._http.request(requestOptions).subscribe((response:HttpResponse<any>)=>{
-             if (response.ok) {
-               let successResult = this.responseTransformer(response)
-               return Observable.of(successResult);
-             }
-        }).catch((response:Response)=>{
-            let errResult = this.responseTransformer(response)
-            return this.DefaultErrorHandler(errResult).flatMap((errResult) => {
-                 return Observable.of(errResult);
-            }); 
-        })  .toPromise();
+        let requestOptions = this.setRequestOptions(URL.url,URL.method,searchParams,reqHeaders,URL.body);
+
+        let differ = new Promise<BaseResponse>((resolve,reject)=>{
+            this._http.request(requestOptions).subscribe((resp:HttpResponse<any>)=>{
+                          if (resp.ok) {
+                           let successResult = this.responseTransformer(resp)
+                           resolve(successResult);
+                          }
+                    },
+                err => {
+                    let errResult = this.errorTransformer(err)
+                        return this.DefaultErrorHandler(errResult).do((errResult) => {
+                            reject(errResult);
+                       }); 
+                }
+              );
+        });
+
+        return differ;
+
     }
 
     public getData (URL:IBaseRequestOps):Promise<BaseResponse>{

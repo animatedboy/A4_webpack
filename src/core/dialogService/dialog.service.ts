@@ -1,6 +1,6 @@
 import {Observable} from 'rxjs/Rx';
-import {ConfirmDialog} from '../Components/confirm.component'
-import {AlertDialog} from '../Components/alert.component'
+import {ConfirmDialog} from '../../shared/dialogService/Components/confirm.component'
+import {AlertDialog} from '../../shared/dialogService/Components/alert.component'
 import {MatDialogRef, MatDialog, MatDialogConfig} from '@angular/material';
 import {Injectable, ViewContainerRef} from '@angular/core';
 

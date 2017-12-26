@@ -1,33 +1,30 @@
-import { Interceptor, InterceptedRequest, InterceptedResponse } from '../../../shared/httpProxy/httpInterceptor/httpProxy';
+import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 import { HttpProgressIndicatorFactory } from './httpProgressIndicator.factory'
 
 @Injectable() 
-export class ProgressIndicatorInterceptor implements Interceptor {
+export class ProgressIndicatorInterceptor implements HttpInterceptor {
 
     constructor(private httpProgressIndicatorFactory:HttpProgressIndicatorFactory){
            
     }
-    public interceptBefore(request: InterceptedRequest): InterceptedRequest {
-        // Do whatever with request: get info or edit it
-        this.httpProgressIndicatorFactory.onRequestStart(request.url);
-        return request;
-        /*
-          You can return:
-            - Request: The modified request
-            - Nothing: For convenience: It's just like returning the request
-            - <any>(Observable.throw("cancelled")): Cancels the request, interrupting it from the pipeline, and calling back 'interceptAfter' in backwards order of those interceptors that got called up to this point.
-        */
-    }
+
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        // Get the auth header from the service.
+        this.httpProgressIndicatorFactory.onRequestStart(req.url);
+        return next.handle(req).do(evt => {
+            this.httpProgressIndicatorFactory.onRequestSuccess("abc");
+            if (evt instanceof HttpResponse) {
+              console.log('---> status:', evt.status);
+              console.log('---> filter:', req.params.get('filter'));
+            }
+          });
+        // Pass on the cloned request instead of the original request.
+       
+      }
  
-    public interceptAfter(response: InterceptedResponse): InterceptedResponse {
-        // Do whatever with response: get info or edit it
+    public interceptAfter(event) {
        this.httpProgressIndicatorFactory.onRequestSuccess("abc");
-        return response;
-        /*
-          You can return:
-            - Response: The modified response
-            - Nothing: For convenience: It's just like returning the response
-        */
     }
 }

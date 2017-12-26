@@ -8,7 +8,7 @@ export interface IBaseRequestOps{
      method:string;
 }
 
-export declare enum ReqMethod {
+ enum ReqMethod {
     Get = 'GET',
     Post = 'POST',
     Put = 'PUT',
@@ -51,21 +51,21 @@ export class URLCreater{
 
     };
 
-   public createGET(urlParams,queryParams):any{
+   public get(urlParams,queryParams):any{
     return new CreateGET(this.url,urlParams,queryParams);
    }
 
-   public CreatePOST(urlParams,queryParams,body):any{
+   public post(urlParams,queryParams,body):any{
        let method = ReqMethod.Post;
        return new CreateUpdate(this.url,method,urlParams,queryParams,body);
    }
 
-   public CreatePUT(urlParams,queryParams,body):any{
+   public put(urlParams,queryParams,body):any{
         let method = ReqMethod.Put;
        return new CreateUpdate(this.url,method,urlParams,queryParams,body);
    }
 
-   public CreateDelete(urlParams,queryParams,body):any{
+   public delete(urlParams,queryParams,body):any{
        let method = ReqMethod.Delete;
        return new CreateUpdate(this.url,method,urlParams,queryParams,body);
    }

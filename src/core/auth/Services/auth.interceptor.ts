@@ -1,42 +1,43 @@
-import { Interceptor, InterceptedRequest, InterceptedResponse } from '../../../shared/httpProxy/httpInterceptor/httpProxy';
+import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import { Headers } from '@angular/http';
+import {Observable} from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+
 //import { CookieService } from '../../cookieService'
 
 @Injectable() 
-export class AuthInterceptor implements Interceptor {
+export class AuthInterceptor implements HttpInterceptor {
 
-    
-    public interceptBefore(request: InterceptedRequest): InterceptedRequest {
-        // Do whatever with request: get info or edit it
-        let token = localStorage.getItem("token");
-        if(token){
-            request.options.headers.append('Authorization',token);
-        }
-        return request;
-        /*
-          You can return:
-            - Request: The modified request
-            - Nothing: For convenience: It's just like returning the request
-            - <any>(Observable.throw("cancelled")): Cancels the request, interrupting it from the pipeline, and calling back 'interceptAfter' in backwards order of those interceptors that got called up to this point.
-        */
-    }
- 
-    public interceptAfter(interceptedResponse: InterceptedResponse): InterceptedResponse {
-        // Do whatever with response: get info or edit it
-        let leapAuthToken = interceptedResponse.response.headers.get('leapauthtoken');
-        let tokenExpiry = interceptedResponse.response.headers.get("tokenexpiry");
 
-        if(leapAuthToken){
-            localStorage.setItem('token',leapAuthToken);
-            localStorage.setItem('token_expiry',tokenExpiry);
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        // Get the auth header from the service.
+        const authHeader = localStorage.getItem("token");
+        let authReq = req;
+        // Clone the request to add the new header.
+        if(authHeader){
+         authReq= req.clone({headers: req.headers.set('Authorization', authHeader)});
+         return next.handle(authReq);
+        
         }
-     
-        return interceptedResponse;
-        /*
-          You can return:
-            - Response: The modified response
-            - Nothing: For convenience: It's just like returning the response
-        */
-    }
+        return next.handle(authReq).do(evt => {
+            if (evt instanceof HttpResponse) {
+              console.log('---> status:', evt.status);
+              console.log('---> filter:', req.params.get('filter'));
+              let leapAuthToken = evt.headers.get('leapauthtoken');
+              let tokenExpiry = evt.headers.get("tokenexpiry");
+
+            if(leapAuthToken){
+                localStorage.setItem('token',leapAuthToken);
+                localStorage.setItem('token_expiry',tokenExpiry);
+            }
+            }else if(evt instanceof HttpErrorResponse){
+                console.log('---> status:', evt.status);
+               console.log('---> filter:', req.params.get('filter'));
+            }
+          });
+        // Pass on the cloned request instead of the original request.
+       
+      }
+
+
 }

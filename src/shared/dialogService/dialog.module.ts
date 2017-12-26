@@ -2,7 +2,7 @@ import { NgModule }  from '@angular/core';
 //import { MaterialModule } from '@angular/material';
 import {ConfirmDialog} from './Components/confirm.component';
 import {AlertDialog} from './Components/alert.component';
-import {DialogsService} from './Services/dialog.service';
+
 
 @NgModule({
     imports: [],
@@ -12,9 +12,7 @@ import {DialogsService} from './Services/dialog.service';
     declarations: [
         ConfirmDialog,AlertDialog
     ],
-    providers: [
-        DialogsService,
-    ],
+    providers: [],
     entryComponents: [
         ConfirmDialog,AlertDialog
     ],

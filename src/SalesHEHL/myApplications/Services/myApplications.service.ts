@@ -1,6 +1,6 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http} from '@angular/http';
-import {RestProxy} from '../../../shared/httpProxy/restProxy/restProxy.service'; // service provider for HttpModule
+import {RestProxy} from '../../../core/restProxy/restProxy.service'; // service provider for HttpModule
 import {Observable} from 'rxjs'; //for returning promise from service request
 import {URLCreater} from '../../../shared/utilities/URLCreater';
 import {ResponseStatus, IBaseResponse} from '../../../shared/utilities/utility';
@@ -12,7 +12,7 @@ export class MyApplicationService {
     private GETAPPLICATIONS = new URLCreater('salesHEHLapi/v1.0/hehl/applications');
 
     getApplications(vdo) : Promise < IBaseResponse > {
-        return this._http.getData(this.GETAPPLICATIONS.createGET({}, {
+        return this._http.getData(this.GETAPPLICATIONS.get({}, {
             limitValue:10,
             skipValue:0
         })).then((response) => {

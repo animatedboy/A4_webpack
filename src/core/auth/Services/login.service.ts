@@ -1,6 +1,6 @@
 import {Injectable , EventEmitter} from '@angular/core';
 import{Http} from '@angular/http';
-import { RestProxy  } from '../../../shared/httpProxy/restProxy/restProxy.service';// service provider for HttpModule
+import { RestProxy  } from '../../restProxy/restProxy.service';// service provider for HttpModule
 import {Observable} from 'rxjs'; //for returning promise from service request
 import {URLCreater} from '../../../shared/utilities/URLCreater';
 import {ResponseStatus,IBaseResponse} from '../../../shared/utilities/utility';

@@ -4,13 +4,15 @@ import { HttpProgressIndicatorModule } from '../core/httpProgressIndicator/httpP
 import { FooterComponent } from './footer/Components/footer.component'
 import { LoginService } from './auth/Services/login.service';
 import { HeaderService } from './header/Services/header.service'
-import {SharedModule} from '../shared/shared.module'
+import {RestProxy} from './restProxy/restProxy.service';
+import {DialogsService} from './dialogService/dialog.service'
+import { SharedModule} from '../shared/shared.module'
 //import {MenuComponent} from '../shared/menu/Components/menu.component'
 
 @NgModule({
   imports: [SharedModule,LoginModule,HttpProgressIndicatorModule],
   declarations:[FooterComponent],
-  providers:[LoginService,HeaderService],
+  providers:[LoginService,HeaderService,RestProxy,DialogsService],
   exports:[HttpProgressIndicatorModule,FooterComponent]
 })
 
